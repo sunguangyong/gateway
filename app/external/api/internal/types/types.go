@@ -106,6 +106,16 @@ type EdgeDeviceListResponse struct {
 	Count int64            `json:"count"` // 总数
 }
 
+type EdgeDeviceListExportRequest struct {
+	PageIndex int64 `json:"pageIndex"` //页码索引
+	PageSize  int64 `json:"pageSize"`  //页码大小
+}
+
+type EdgeDeviceListExportResponse struct {
+	Data  []EdgeDeviceData `json:"data"`  // 返回值
+	Count int64            `json:"count"` // 总数
+}
+
 type EdgeDeviceData struct {
 	EdgeDeviceId   int64  `json:"edgeDeviceId"`   // 网关id 新增 0
 	EdgeDeviceName string `json:"edgeDeviceName"` // 网关名称

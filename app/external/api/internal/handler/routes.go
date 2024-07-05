@@ -47,6 +47,11 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Path:    "/api/gateway/list",
 				Handler: gatewayListHandler(serverCtx),
 			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/api/gateway/list-export",
+				Handler: GatewayListExportHandler(serverCtx),
+			},
 		},
 	)
 

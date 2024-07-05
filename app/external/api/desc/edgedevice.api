@@ -38,6 +38,18 @@ type (
 		Count int64            `json:"count"` // 总数
 	}
 
+
+	EdgeDeviceListExportRequest {
+		PageIndex int64 `json:"pageIndex"` //页码索引
+		PageSize  int64 `json:"pageSize"`  //页码大小
+	}
+
+	EdgeDeviceListExportResponse {
+		Data  []EdgeDeviceData `json:"data"`   // 返回值
+		Count int64            `json:"count"` // 总数
+	}
+
+
 	EdgeDeviceData {
 		EdgeDeviceId   int64  `json:"edgeDeviceId"`   // 网关id 新增 0
 		EdgeDeviceName string `json:"edgeDeviceName"` // 网关名称
@@ -82,4 +94,11 @@ service apis {
 	)
 	@handler gatewayList
 	post /api/gateway/list (EdgeDeviceListRequest) returns (EdgeDeviceListResponse)
+
+
+	@doc(
+		summary: "导出网关列表"
+	)
+	@handler GatewayListExport
+	post /api/gateway/list-export (EdgeDeviceListRequest) returns (EdgeDeviceListResponse)
 }
