@@ -1,0 +1,8 @@
+Name: apis
+Host: 0.0.0.0
+Port: 8888
+Timeout: 20000
+
+
+IotMysql:
+  DataSource: XcL:XJKJxjkj@2023@tcp(124.70.165.148:3306)/flexedge?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai

@@ -1,0 +1,85 @@
+syntax = "v1"
+
+info(
+	title: "网关协议"
+	desc: "网关协议配置及部署相关功能"
+	author: "sunguangyong"
+	email: "sungy@xunjikeji.com.cn"
+	version: "v1"
+)
+
+type (
+	EdgeDeviceSaveRequest {
+		EdgeDeviceId   int64  `json:"edgeDeviceId"`   // 网关id 新增 0
+		EdgeDeviceName string `json:"edgeDeviceName"` // 网关名称
+		DevicePosition string `json:"devicePosition"` // 网关位置
+		IpAddress      string `json:"ipAddress"`      // ip地址
+		Mac            string `json:"mac"`            //mac 地址
+		DeviceDesc     string `json:"deviceDesc"`     // 设备描述
+		SimCard        string `json:"simCard"`        //sim 卡
+		GatewayId      int64  `json:"gatewayId"`      // 网关型号
+	}
+
+	EdgeDeviceSaveResponse struct{}
+
+	EdgeDeviceDeleteRequest {
+		EdgeDeviceIds []int64 `json:"edgeDeviceIds"`// 网关id
+	}
+
+	EdgeDeviceDeleteResponse struct{}
+
+	EdgeDeviceListRequest {
+		PageIndex int64 `json:"pageIndex"` //页码索引
+		PageSize  int64 `json:"pageSize"`  //页码大小
+	}
+
+	EdgeDeviceListResponse {
+		Data  []EdgeDeviceData `json:"data"`   // 返回值
+		Count int64            `json:"count"` // 总数
+	}
+
+	EdgeDeviceData {
+		EdgeDeviceId   int64  `json:"edgeDeviceId"`   // 网关id 新增 0
+		EdgeDeviceName string `json:"edgeDeviceName"` // 网关名称
+		DevicePosition string `json:"devicePosition"` // 网关位置
+		IpAddress      string `json:"ipAddress"`      // ip地址
+		Mac            string `json:"mac"`            //mac 地址
+		DeviceDesc     string `json:"deviceDesc"`     // 设备描述
+		SimCard        string `json:"simCard"`        //sim 卡
+		GatewayId      int64  `json:"gatewayId"`      // 网关型号
+		Status         int64  `json:"status"`         // 1 在线/0 离线
+	}
+
+	heartBeatRequest {
+		EdgeDeviceId int64 `json:"edgeDeviceId"` // 配置Id
+	}
+
+	heartBeatRequestResponse {}
+)
+
+service apis {
+
+	@doc(
+		summary: "查询网关是否在线"
+	)
+	@handler heartbeat
+	post /api/gateway/external/heart/beat (heartBeatRequest) returns (heartBeatRequestResponse)
+	
+	@doc(
+		summary: "新增修改网关"
+	)
+	@handler gatewaySave
+	post /api/gateway/save (EdgeDeviceSaveRequest) returns (EdgeDeviceSaveResponse)
+	
+	@doc(
+		summary: "删除网关"
+	)
+	@handler gatewayDelete
+	post /api/gateway/delete (EdgeDeviceDeleteRequest) returns (EdgeDeviceDeleteResponse)
+	
+	@doc(
+		summary: "获取网关列表"
+	)
+	@handler gatewayList
+	post /api/gateway/list (EdgeDeviceListRequest) returns (EdgeDeviceListResponse)
+}

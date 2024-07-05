@@ -1,0 +1,8 @@
+version: '3'
+services:
+  protocol:
+    image: xunjikeji.com.cn:5000/gateway:v1 # 镜像名称
+    ports:
+      - 8887:8887
+    restart: always
+    #command: ./main -path ./conf # 启动容器时覆盖 dockerfile 里的 CMD

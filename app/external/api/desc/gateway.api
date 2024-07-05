@@ -1,0 +1,15 @@
+info(
+	title: "网关协议"
+	desc: "网关协议配置及部署相关功能"
+	author: "sunguangyong"
+	email: "sungy@xunjikeji.com.cn"
+	version: "v1"
+)
+
+import (
+	"protocol.api"
+	"edgedevice.api"
+	"nedevice.api"
+	"point.api"
+	"protocolconfig.api"
+)

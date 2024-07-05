@@ -1,0 +1,9 @@
+Name: apis
+Host: 0.0.0.0
+Port: 8887
+Timeout: 20000
+
+
+IotMysql:
+    #DataSource: XcL:XJKJxjkj@2023@tcp(124.70.165.148:3306)/xlm?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
+  DataSource: root:qIlRn)muX83d@tcp(82.156.56.237:3306)/protocols?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai

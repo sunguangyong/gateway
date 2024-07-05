@@ -1,0 +1,1957 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "网关协议",
+    "description": "网关协议配置及部署相关功能",
+    "version": "v1"
+  },
+  "basePath": "/api",
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/gateway/delete": {
+      "post": {
+        "summary": "删除网关",
+        "operationId": "gatewayDelete",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/EdgeDeviceDeleteResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EdgeDeviceDeleteRequest"
+            }
+          }
+        ],
+        "tags": [
+          "apis"
+        ]
+      }
+    },
+    "/api/gateway/export/protocol/config": {
+      "post": {
+        "summary": "导出网关协议配置(暂不使用)",
+        "operationId": "exportConfig",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/protocolSaveResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/exportConfigRequest"
+            }
+          }
+        ],
+        "tags": [
+          "apis"
+        ]
+      }
+    },
+    "/api/gateway/external/heart/beat": {
+      "post": {
+        "summary": "查询网关是否在线",
+        "operationId": "heartbeat",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/heartBeatRequestResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/heartBeatRequest"
+            }
+          }
+        ],
+        "tags": [
+          "apis"
+        ]
+      }
+    },
+    "/api/gateway/external/point/delete": {
+      "post": {
+        "summary": "删除单个点表配置",
+        "operationId": "pointDelete",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pointDelResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/pointDelRequest"
+            }
+          }
+        ],
+        "tags": [
+          "apis"
+        ]
+      }
+    },
+    "/api/gateway/external/point/list": {
+      "post": {
+        "summary": "获取协议所有点表配置",
+        "operationId": "pointList",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pointListResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/pointListRequest"
+            }
+          }
+        ],
+        "tags": [
+          "apis"
+        ]
+      }
+    },
+    "/api/gateway/external/point/save": {
+      "post": {
+        "summary": "点表配置",
+        "operationId": "pointSave",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pointSaveResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/pointSaveRequest"
+            }
+          }
+        ],
+        "tags": [
+          "apis"
+        ]
+      }
+    },
+    "/api/gateway/external/pointall/delete": {
+      "post": {
+        "summary": "删除协议下的所有点表配置",
+        "operationId": "pointDeleteAll",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pointDelAllResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/pointDelAllRequest"
+            }
+          }
+        ],
+        "tags": [
+          "apis"
+        ]
+      }
+    },
+    "/api/gateway/external/protocol/delete": {
+      "post": {
+        "summary": "删除协议配置",
+        "operationId": "protoDelete",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/protocolDelResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/protocolDelRequest"
+            }
+          }
+        ],
+        "tags": [
+          "apis"
+        ]
+      }
+    },
+    "/api/gateway/external/protocol/deploy": {
+      "post": {
+        "summary": "部署设备协议v2",
+        "operationId": "protocolDeploy",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/ProtocolDeployResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProtocolDeployRequest"
+            }
+          }
+        ],
+        "tags": [
+          "apis"
+        ]
+      }
+    },
+    "/api/gateway/external/protocol/dropdown": {
+      "post": {
+        "summary": "协议名称下拉框",
+        "operationId": "protoDropDown",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/protoDropDownResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/protoDropDownRequest"
+            }
+          }
+        ],
+        "tags": [
+          "apis"
+        ]
+      }
+    },
+    "/api/gateway/external/protocol/list": {
+      "post": {
+        "summary": "获取协议配置",
+        "operationId": "protoList",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/protocolListResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/protocolListRequest"
+            }
+          }
+        ],
+        "tags": [
+          "apis"
+        ]
+      }
+    },
+    "/api/gateway/external/protocol/readtest": {
+      "post": {
+        "summary": "测试读协议v2",
+        "operationId": "protocolReadTest",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/ProtocolTestResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProtocolTestRequest"
+            }
+          }
+        ],
+        "tags": [
+          "apis"
+        ]
+      }
+    },
+    "/api/gateway/external/protocol/save": {
+      "post": {
+        "summary": "保存协议配置",
+        "operationId": "protoSave",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/protocolSaveResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/protocolSaveRequest"
+            }
+          }
+        ],
+        "tags": [
+          "apis"
+        ]
+      }
+    },
+    "/api/gateway/external/protocol/writetest": {
+      "post": {
+        "summary": "测试写协议新增",
+        "operationId": "protocolWriteTest",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/ProtocolWriteTestResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProtocolWriteTestRequest"
+            }
+          }
+        ],
+        "tags": [
+          "apis"
+        ]
+      }
+    },
+    "/api/gateway/external/protoconfig/dropdown": {
+      "post": {
+        "summary": "协议配置信息下拉框",
+        "operationId": "protoConfigDropDown",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/protoConfigDropDownResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/protoConfigDropDownRequest"
+            }
+          }
+        ],
+        "tags": [
+          "apis"
+        ]
+      }
+    },
+    "/api/gateway/external/writpoint/list": {
+      "post": {
+        "summary": "获取写协议所有点表配置",
+        "operationId": "pointWriteList",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/WritepointListResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/WritePointListRequest"
+            }
+          }
+        ],
+        "tags": [
+          "apis"
+        ]
+      }
+    },
+    "/api/gateway/list": {
+      "post": {
+        "summary": "获取网关列表",
+        "operationId": "gatewayList",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/EdgeDeviceListResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EdgeDeviceListRequest"
+            }
+          }
+        ],
+        "tags": [
+          "apis"
+        ]
+      }
+    },
+    "/api/gateway/save": {
+      "post": {
+        "summary": "新增修改网关",
+        "operationId": "gatewaySave",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/EdgeDeviceSaveResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EdgeDeviceSaveRequest"
+            }
+          }
+        ],
+        "tags": [
+          "apis"
+        ]
+      }
+    },
+    "/api/nedevice/delete": {
+      "post": {
+        "summary": "删除设备",
+        "operationId": "neDeviceDelete",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/NeDeviceDeleteResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NeDeviceDeleteRequest"
+            }
+          }
+        ],
+        "tags": [
+          "apis"
+        ]
+      }
+    },
+    "/api/nedevice/list": {
+      "post": {
+        "summary": "设备列表",
+        "operationId": "neDeviceList",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/NeDeviceListResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NeDeviceListRequest"
+            }
+          }
+        ],
+        "tags": [
+          "apis"
+        ]
+      }
+    },
+    "/api/nedevice/save": {
+      "post": {
+        "summary": "新增设备",
+        "operationId": "neDeviceSave",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/NeDeviceSaveResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NeDeviceSaveRequest"
+            }
+          }
+        ],
+        "tags": [
+          "apis"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "AccessOptionsData": {
+      "type": "object",
+      "properties": {
+        "protocol": {
+          "type": "string",
+          "description": " 协议名称"
+        },
+        "agwId": {
+          "type": "string",
+          "description": " 网关id"
+        },
+        "slaveId": {
+          "type": "string",
+          "description": " 从站地址"
+        },
+        "offset": {
+          "type": "string"
+        },
+        "functionCode": {
+          "type": "string"
+        },
+        "quantity": {
+          "type": "string"
+        },
+        "addParam": {
+          "type": "string"
+        }
+      },
+      "title": "AccessOptionsData",
+      "required": [
+        "protocol",
+        "agwId",
+        "slaveId",
+        "offset",
+        "functionCode",
+        "quantity",
+        "addParam"
+      ]
+    },
+    "Content": {
+      "type": "object",
+      "properties": {
+        "addr": {
+          "type": "object"
+        },
+        "addrValue": {
+          "type": "object"
+        }
+      },
+      "title": "Content",
+      "required": [
+        "addr",
+        "addrValue"
+      ]
+    },
+    "DeployArray": {
+      "type": "object",
+      "properties": {
+        "nid": {
+          "type": "integer",
+          "format": "int64",
+          "description": " 协议id"
+        },
+        "configName": {
+          "type": "string",
+          "description": " 协议名字"
+        },
+        "deviceNid": {
+          "type": "integer",
+          "format": "int64",
+          "description": " 设备ID"
+        },
+        "deviceName": {
+          "type": "string",
+          "description": " 设备名字"
+        },
+        "msg": {
+          "type": "string",
+          "description": " 错误描述信息"
+        }
+      },
+      "title": "DeployArray",
+      "required": [
+        "nid",
+        "configName",
+        "deviceNid",
+        "deviceName",
+        "msg"
+      ]
+    },
+    "Dropdown": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "object"
+        },
+        "label": {
+          "type": "object"
+        }
+      },
+      "title": "Dropdown",
+      "required": [
+        "value",
+        "label"
+      ]
+    },
+    "EdgeDeviceData": {
+      "type": "object",
+      "properties": {
+        "edgeDeviceId": {
+          "type": "integer",
+          "format": "int64",
+          "description": " 网关id 新增 0"
+        },
+        "edgeDeviceName": {
+          "type": "string",
+          "description": " 网关名称"
+        },
+        "devicePosition": {
+          "type": "string",
+          "description": " 网关位置"
+        },
+        "ipAddress": {
+          "type": "string",
+          "description": " ip地址"
+        },
+        "mac": {
+          "type": "string",
+          "description": "mac 地址"
+        },
+        "deviceDesc": {
+          "type": "string",
+          "description": " 设备描述"
+        },
+        "simCard": {
+          "type": "string",
+          "description": "sim 卡"
+        },
+        "gatewayId": {
+          "type": "integer",
+          "format": "int64",
+          "description": " 网关型号"
+        },
+        "status": {
+          "type": "integer",
+          "format": "int64",
+          "description": " 1 在线/0 离线"
+        }
+      },
+      "title": "EdgeDeviceData",
+      "required": [
+        "edgeDeviceId",
+        "edgeDeviceName",
+        "devicePosition",
+        "ipAddress",
+        "mac",
+        "deviceDesc",
+        "simCard",
+        "gatewayId",
+        "status"
+      ]
+    },
+    "EdgeDeviceDeleteRequest": {
+      "type": "object",
+      "properties": {
+        "edgeDeviceIds": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "description": " 网关id"
+        }
+      },
+      "title": "EdgeDeviceDeleteRequest",
+      "required": [
+        "edgeDeviceIds"
+      ]
+    },
+    "EdgeDeviceDeleteResponse": {
+      "type": "object",
+      "title": "EdgeDeviceDeleteResponse"
+    },
+    "EdgeDeviceListRequest": {
+      "type": "object",
+      "properties": {
+        "pageIndex": {
+          "type": "integer",
+          "format": "int64",
+          "description": "页码索引"
+        },
+        "pageSize": {
+          "type": "integer",
+          "format": "int64",
+          "description": "页码大小"
+        }
+      },
+      "title": "EdgeDeviceListRequest",
+      "required": [
+        "pageIndex",
+        "pageSize"
+      ]
+    },
+    "EdgeDeviceListResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EdgeDeviceData"
+          },
+          "description": " 返回值"
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": " 总数"
+        }
+      },
+      "title": "EdgeDeviceListResponse",
+      "required": [
+        "data",
+        "count"
+      ]
+    },
+    "EdgeDeviceSaveRequest": {
+      "type": "object",
+      "properties": {
+        "edgeDeviceId": {
+          "type": "integer",
+          "format": "int64",
+          "description": " 网关id 新增 0"
+        },
+        "edgeDeviceName": {
+          "type": "string",
+          "description": " 网关名称"
+        },
+        "devicePosition": {
+          "type": "string",
+          "description": " 网关位置"
+        },
+        "ipAddress": {
+          "type": "string",
+          "description": " ip地址"
+        },
+        "mac": {
+          "type": "string",
+          "description": "mac 地址"
+        },
+        "deviceDesc": {
+          "type": "string",
+          "description": " 设备描述"
+        },
+        "simCard": {
+          "type": "string",
+          "description": "sim 卡"
+        },
+        "gatewayId": {
+          "type": "integer",
+          "format": "int64",
+          "description": " 网关型号"
+        }
+      },
+      "title": "EdgeDeviceSaveRequest",
+      "required": [
+        "edgeDeviceId",
+        "edgeDeviceName",
+        "devicePosition",
+        "ipAddress",
+        "mac",
+        "deviceDesc",
+        "simCard",
+        "gatewayId"
+      ]
+    },
+    "EdgeDeviceSaveResponse": {
+      "type": "object",
+      "title": "EdgeDeviceSaveResponse"
+    },
+    "ModbusRtuJsonItems": {
+      "type": "object",
+      "properties": {
+        "protocol": {
+          "type": "string",
+          "description": " 协议"
+        },
+        "address": {
+          "type": "integer",
+          "format": "uin16",
+          "description": " 地址位"
+        },
+        "dataName": {
+          "type": "string",
+          "description": " 数据名称"
+        },
+        "method": {
+          "type": "string",
+          "description": " 读取方法"
+        }
+      },
+      "title": "ModbusRtuJsonItems",
+      "required": [
+        "protocol",
+        "address",
+        "dataName",
+        "method"
+      ]
+    },
+    "ModbusRtuJsonOptions": {
+      "type": "object",
+      "properties": {
+        "protocol": {
+          "type": "string",
+          "description": " 协议名称"
+        },
+        "slaveId": {
+          "$ref": "#/definitions/byte",
+          "description": " 从站地址"
+        },
+        "baudRate": {
+          "type": "integer",
+          "format": "int32",
+          "description": " 波特率"
+        },
+        "dataBits": {
+          "type": "integer",
+          "format": "int32",
+          "description": " 数据位"
+        },
+        "stopBits": {
+          "type": "integer",
+          "format": "int32",
+          "description": " 停止位"
+        },
+        "parity": {
+          "type": "string",
+          "description": " 校验方式"
+        }
+      },
+      "title": "ModbusRtuJsonOptions",
+      "required": [
+        "protocol",
+        "slaveId",
+        "baudRate",
+        "dataBits",
+        "stopBits",
+        "parity"
+      ]
+    },
+    "ModbusTcpJsonItems": {
+      "type": "object",
+      "properties": {
+        "protocol": {
+          "type": "string",
+          "description": " 协议"
+        },
+        "address": {
+          "type": "integer",
+          "format": "uin16",
+          "description": " 地址位"
+        },
+        "dataName": {
+          "type": "string",
+          "description": " 数据名称"
+        },
+        "method": {
+          "type": "string",
+          "description": " 读取方法"
+        }
+      },
+      "title": "ModbusTcpJsonItems",
+      "required": [
+        "protocol",
+        "address",
+        "dataName",
+        "method"
+      ]
+    },
+    "ModbusTcpJsonOptions": {
+      "type": "object",
+      "properties": {
+        "protocol": {
+          "type": "string",
+          "description": " 协议类型"
+        },
+        "slaveId": {
+          "$ref": "#/definitions/byte",
+          "description": " 从站地址"
+        }
+      },
+      "title": "ModbusTcpJsonOptions",
+      "required": [
+        "protocol",
+        "slaveId"
+      ]
+    },
+    "NeDeviceDeleteRequest": {
+      "type": "object",
+      "properties": {
+        "agwId": {
+          "type": "integer",
+          "format": "int64",
+          "description": " 网关ID"
+        },
+        "neDeviceIds": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "description": " 设备id"
+        }
+      },
+      "title": "NeDeviceDeleteRequest",
+      "required": [
+        "agwId",
+        "neDeviceIds"
+      ]
+    },
+    "NeDeviceDeleteResponse": {
+      "type": "object",
+      "title": "NeDeviceDeleteResponse"
+    },
+    "NeDeviceList": {
+      "type": "object",
+      "properties": {
+        "nid": {
+          "type": "integer",
+          "format": "int64",
+          "description": " 设备ID"
+        },
+        "deviceName": {
+          "type": "string",
+          "description": " 设备名称"
+        },
+        "connectProtocol": {
+          "type": "string",
+          "description": " 访问协议"
+        },
+        "deviceLocations": {
+          "type": "string",
+          "description": " 设备位置"
+        },
+        "agwId": {
+          "type": "integer",
+          "format": "int64",
+          "description": " 网关ID"
+        },
+        "issued": {
+          "type": "integer",
+          "format": "int64",
+          "description": " 是否下发 1-是，0-否"
+        },
+        "createTime": {
+          "type": "string",
+          "description": " 设备创建时间"
+        },
+        "deviceStatus": {
+          "type": "integer",
+          "format": "int64",
+          "description": " 0---离线 1---- 在线"
+        }
+      },
+      "title": "NeDeviceList",
+      "required": [
+        "nid",
+        "deviceName",
+        "connectProtocol",
+        "deviceLocations",
+        "agwId",
+        "issued",
+        "createTime",
+        "deviceStatus"
+      ]
+    },
+    "NeDeviceListRequest": {
+      "type": "object",
+      "properties": {
+        "edgeDeviceId": {
+          "type": "integer",
+          "format": "int64",
+          "description": " 网关设备ID"
+        },
+        "pageIndex": {
+          "type": "integer",
+          "format": "int64",
+          "description": "页码索引"
+        },
+        "pageSize": {
+          "type": "integer",
+          "format": "int64",
+          "description": "页码大小"
+        }
+      },
+      "title": "NeDeviceListRequest",
+      "required": [
+        "edgeDeviceId",
+        "pageIndex",
+        "pageSize"
+      ]
+    },
+    "NeDeviceListResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NeDeviceList"
+          },
+          "description": " 数量"
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": " 总数"
+        }
+      },
+      "title": "NeDeviceListResponse",
+      "required": [
+        "data",
+        "count"
+      ]
+    },
+    "NeDeviceSaveRequest": {
+      "type": "object",
+      "properties": {
+        "nid": {
+          "type": "integer",
+          "format": "int64",
+          "description": " 设备ID"
+        },
+        "deviceName": {
+          "type": "string",
+          "description": " 设备名称"
+        },
+        "deviceDesc": {
+          "type": "string",
+          "description": " 设备描述"
+        },
+        "connectProtocol": {
+          "type": "string",
+          "description": " 连接协议"
+        },
+        "agwId": {
+          "type": "integer",
+          "format": "int64",
+          "description": " 网关ID"
+        }
+      },
+      "title": "NeDeviceSaveRequest",
+      "required": [
+        "nid",
+        "deviceName",
+        "deviceDesc",
+        "connectProtocol",
+        "agwId"
+      ]
+    },
+    "NeDeviceSaveResponse": {
+      "type": "object",
+      "title": "NeDeviceSaveResponse"
+    },
+    "OpcUaJsonItems": {
+      "type": "object",
+      "properties": {
+        "protocol": {
+          "type": "string",
+          "description": " 协议名称"
+        },
+        "nodeId": {
+          "type": "string",
+          "description": " 节点Id"
+        },
+        "dataName": {
+          "type": "string",
+          "description": " 数据名称"
+        },
+        "method": {
+          "type": "string",
+          "description": " 读取方法"
+        }
+      },
+      "title": "OpcUaJsonItems",
+      "required": [
+        "protocol",
+        "nodeId",
+        "dataName",
+        "method"
+      ]
+    },
+    "OpcUaJsonOptions": {
+      "type": "object",
+      "properties": {
+        "protocol": {
+          "type": "string",
+          "description": " 协议名称"
+        },
+        "userName": {
+          "type": "string",
+          "description": " 用户名"
+        },
+        "passWd": {
+          "type": "string",
+          "description": " 密码"
+        },
+        "policy": {
+          "type": "string",
+          "description": " 端点2 加密策略"
+        },
+        "mode": {
+          "type": "string",
+          "description": " 端点1 模式"
+        },
+        "cert": {
+          "type": "boolean",
+          "format": "boolean",
+          "description": " 是否需要证书"
+        }
+      },
+      "title": "OpcUaJsonOptions",
+      "required": [
+        "protocol",
+        "userName",
+        "passWd",
+        "policy",
+        "mode",
+        "cert"
+      ]
+    },
+    "PointData": {
+      "type": "object",
+      "properties": {
+        "nid": {
+          "type": "integer",
+          "format": "int64",
+          "description": " 点表id"
+        },
+        "configType": {
+          "type": "integer",
+          "format": "int64",
+          "description": " 0-读/写,1-只读,2-只写"
+        },
+        "configNid": {
+          "type": "integer",
+          "format": "int64",
+          "description": " 协议配置id"
+        },
+        "accessOptions": {
+          "$ref": "#/definitions/mapstringinterface",
+          "description": "类型实际为json 类型 根据协议不同参数类型不固定详细字段查看\tModbusRtuJsonItems、ModbusTcpJsonItems、OpcuaJsonItems"
+        }
+      },
+      "title": "PointData",
+      "required": [
+        "nid",
+        "configType",
+        "configNid",
+        "accessOptions"
+      ]
+    },
+    "ProtocolDeployRequest": {
+      "type": "object",
+      "properties": {
+        "agwId": {
+          "type": "integer",
+          "format": "int64",
+          "description": " 网关id"
+        },
+        "neDeviceIds": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "description": " 设备id"
+        }
+      },
+      "title": "ProtocolDeployRequest",
+      "required": [
+        "agwId",
+        "neDeviceIds"
+      ]
+    },
+    "ProtocolDeployResponse": {
+      "type": "object",
+      "properties": {
+        "failArray": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeployArray"
+          },
+          "description": " 失败列表"
+        },
+        "successArray": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeployArray"
+          },
+          "description": " 成功列表"
+        }
+      },
+      "title": "ProtocolDeployResponse",
+      "required": [
+        "failArray",
+        "successArray"
+      ]
+    },
+    "ProtocolGain": {
+      "type": "object",
+      "properties": {
+        "nid": {
+          "type": "integer",
+          "format": "int64",
+          "description": " 协议配置id"
+        },
+        "protocol": {
+          "type": "string",
+          "description": " 协议名称"
+        },
+        "deviceNid": {
+          "type": "integer",
+          "format": "int64",
+          "description": " 设备ID"
+        },
+        "agwId": {
+          "type": "integer",
+          "format": "int64",
+          "description": " 所属网关ID"
+        },
+        "configType": {
+          "type": "integer",
+          "format": "int64",
+          "description": " 0-读/写,1-只读,2-只写"
+        },
+        "configName": {
+          "type": "string",
+          "description": " 配置名称"
+        },
+        "endpoint": {
+          "type": "string",
+          "description": " 连接信息"
+        },
+        "issued": {
+          "type": "integer",
+          "format": "int64",
+          "description": " 是否已经下发：1-是，0-否"
+        },
+        "issueTime": {
+          "type": "string",
+          "description": " 下发时间"
+        },
+        "accessOptions": {
+          "$ref": "#/definitions/mapstringinterface",
+          "description": " 访问连接配置 显示为string 类型实际为json 类型 根据协议不同参数类型不固定详细字段查看 Models（ModbusRtuJsonOptions、ModbusTcpJsonOptions、OpcUaJsonOptions）"
+        }
+      },
+      "title": "ProtocolGain",
+      "required": [
+        "nid",
+        "protocol",
+        "deviceNid",
+        "agwId",
+        "configType",
+        "configName",
+        "endpoint",
+        "issued",
+        "issueTime",
+        "accessOptions"
+      ]
+    },
+    "ProtocolTestRequest": {
+      "type": "object",
+      "properties": {
+        "agwId": {
+          "type": "integer",
+          "format": "int64",
+          "description": " 网关id"
+        },
+        "neDeviceIds": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "description": " 设备id"
+        }
+      },
+      "title": "ProtocolTestRequest",
+      "required": [
+        "agwId",
+        "neDeviceIds"
+      ]
+    },
+    "ProtocolTestResponse": {
+      "type": "object",
+      "properties": {
+        "deviceName": {
+          "type": "string"
+        },
+        "timestamp": {
+          "type": "string"
+        },
+        "contentList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Content"
+          }
+        }
+      },
+      "title": "ProtocolTestResponse",
+      "required": [
+        "deviceName",
+        "timestamp",
+        "contentList"
+      ]
+    },
+    "ProtocolWriteTestRequest": {
+      "type": "object",
+      "properties": {
+        "agwId": {
+          "type": "integer",
+          "format": "int64",
+          "description": " 网关id"
+        },
+        "address": {
+          "type": "integer",
+          "format": "uin16",
+          "description": " 地址位"
+        },
+        "method": {
+          "type": "string",
+          "description": " 属性方法"
+        },
+        "neDeviceId": {
+          "type": "integer",
+          "format": "int64",
+          "description": " 设备id"
+        },
+        "configNid": {
+          "type": "integer",
+          "format": "int64",
+          "description": " 协议id"
+        },
+        "dataName": {
+          "type": "string",
+          "description": " 属性名"
+        },
+        "nid": {
+          "type": "integer",
+          "format": "int64",
+          "description": " 点表id"
+        },
+        "value": {
+          "type": "string",
+          "description": " 写入值"
+        }
+      },
+      "title": "ProtocolWriteTestRequest",
+      "required": [
+        "agwId",
+        "address",
+        "method",
+        "neDeviceId",
+        "configNid",
+        "dataName",
+        "nid",
+        "value"
+      ]
+    },
+    "ProtocolWriteTestResponse": {
+      "type": "object",
+      "title": "ProtocolWriteTestResponse"
+    },
+    "WritePointListRequest": {
+      "type": "object",
+      "properties": {
+        "agwId": {
+          "type": "integer",
+          "format": "int64",
+          "description": " 网关id"
+        },
+        "configType": {
+          "type": "integer",
+          "format": "int64",
+          "description": " 0-读/写,1-只读,2-只写"
+        },
+        "neDeviceId": {
+          "type": "integer",
+          "format": "int64",
+          "description": " 设备id"
+        }
+      },
+      "title": "WritePointListRequest",
+      "required": [
+        "agwId",
+        "configType",
+        "neDeviceId"
+      ]
+    },
+    "WritePointResponse": {
+      "type": "object",
+      "properties": {
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PointData"
+          },
+          "description": " 数据列表"
+        }
+      },
+      "title": "WritePointResponse",
+      "required": [
+        "list"
+      ]
+    },
+    "WritepointList": {
+      "type": "object",
+      "properties": {
+        "nid": {
+          "type": "integer",
+          "format": "int64",
+          "description": " 点位 id"
+        },
+        "address": {
+          "type": "integer",
+          "format": "uin16",
+          "description": " 地址位"
+        },
+        "configNid": {
+          "type": "integer",
+          "format": "int64",
+          "description": " 协议配置id"
+        },
+        "dataName": {
+          "type": "string",
+          "description": " 属性名"
+        },
+        "method": {
+          "type": "string",
+          "description": " 属性方法"
+        }
+      },
+      "title": "WritepointList",
+      "required": [
+        "nid",
+        "address",
+        "configNid",
+        "dataName",
+        "method"
+      ]
+    },
+    "WritepointListResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WritepointList"
+          }
+        }
+      },
+      "title": "WritepointListResponse",
+      "required": [
+        "data"
+      ]
+    },
+    "configSaveRequest": {
+      "type": "object",
+      "properties": {
+        "nid": {
+          "type": "string",
+          "description": " id"
+        },
+        "protocol": {
+          "type": "string",
+          "description": " 协议名称"
+        },
+        "deviceNid": {
+          "type": "string",
+          "description": " 设备id"
+        },
+        "agwId": {
+          "type": "string",
+          "description": " 网关id"
+        },
+        "configType": {
+          "type": "integer",
+          "format": "int32",
+          "description": " 0-读/写,1-只读,2-只写"
+        },
+        "configName": {
+          "type": "string",
+          "description": " 配置名称"
+        },
+        "endpoint": {
+          "type": "string",
+          "description": " 连接信息"
+        },
+        "accessOptions": {
+          "$ref": "#/definitions/AccessOptionsData",
+          "description": " 访问连接配置"
+        }
+      },
+      "title": "configSaveRequest",
+      "required": [
+        "nid",
+        "protocol",
+        "deviceNid",
+        "agwId",
+        "configType",
+        "configName",
+        "endpoint",
+        "accessOptions"
+      ]
+    },
+    "configSaveResponse": {
+      "type": "object",
+      "title": "configSaveResponse"
+    },
+    "exportConfigRequest": {
+      "type": "object",
+      "properties": {
+        "agwId": {
+          "type": "integer",
+          "format": "int64",
+          "description": " 所属网关ID"
+        }
+      },
+      "title": "exportConfigRequest",
+      "required": [
+        "agwId"
+      ]
+    },
+    "exportConfigResponse": {
+      "type": "object",
+      "title": "exportConfigResponse"
+    },
+    "heartBeatRequest": {
+      "type": "object",
+      "properties": {
+        "edgeDeviceId": {
+          "type": "integer",
+          "format": "int64",
+          "description": " 配置Id"
+        }
+      },
+      "title": "heartBeatRequest",
+      "required": [
+        "edgeDeviceId"
+      ]
+    },
+    "heartBeatRequestResponse": {
+      "type": "object",
+      "title": "heartBeatRequestResponse"
+    },
+    "pointDelAllRequest": {
+      "type": "object",
+      "properties": {
+        "configNid": {
+          "type": "integer",
+          "format": "int64",
+          "description": " 协议id"
+        }
+      },
+      "title": "pointDelAllRequest",
+      "required": [
+        "configNid"
+      ]
+    },
+    "pointDelAllResponse": {
+      "type": "object",
+      "title": "pointDelAllResponse"
+    },
+    "pointDelRequest": {
+      "type": "object",
+      "properties": {
+        "nids": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "description": " 点表id"
+        }
+      },
+      "title": "pointDelRequest",
+      "required": [
+        "nids"
+      ]
+    },
+    "pointDelResponse": {
+      "type": "object",
+      "title": "pointDelResponse"
+    },
+    "pointListRequest": {
+      "type": "object",
+      "properties": {
+        "configNid": {
+          "type": "integer",
+          "format": "int64",
+          "description": " 协议配置id"
+        },
+        "pageIndex": {
+          "type": "integer",
+          "format": "int64",
+          "description": "页码索引"
+        },
+        "pageSize": {
+          "type": "integer",
+          "format": "int64",
+          "description": "页码大小"
+        }
+      },
+      "title": "pointListRequest",
+      "required": [
+        "configNid",
+        "pageIndex",
+        "pageSize"
+      ]
+    },
+    "pointListResponse": {
+      "type": "object",
+      "properties": {
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PointData"
+          },
+          "description": " 数据列表"
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": " 总数"
+        }
+      },
+      "title": "pointListResponse",
+      "required": [
+        "list",
+        "count"
+      ]
+    },
+    "pointSaveRequest": {
+      "type": "object",
+      "properties": {
+        "nid": {
+          "type": "integer",
+          "format": "int64",
+          "description": " 点表id 新增 0"
+        },
+        "agwId": {
+          "type": "integer",
+          "format": "int64",
+          "description": " 网关id"
+        },
+        "deviceNid": {
+          "type": "integer",
+          "format": "int64",
+          "description": " 设备id"
+        },
+        "configType": {
+          "type": "integer",
+          "format": "int64",
+          "description": " 0-读/写,1-只读,2-只写"
+        },
+        "configNid": {
+          "type": "integer",
+          "format": "int64",
+          "description": " 协议配置id"
+        },
+        "accessOptions": {
+          "$ref": "#/definitions/mapstringinterface",
+          "description": " 点表配置 显示为string 类型实际为json 类型 根据协议不同参数类型不固定详细字段查看 Models\tModbusRtuJsonItems、ModbusTcpJsonItems、ModbusTcpJsonItems"
+        }
+      },
+      "title": "pointSaveRequest",
+      "required": [
+        "nid",
+        "agwId",
+        "deviceNid",
+        "configType",
+        "configNid",
+        "accessOptions"
+      ]
+    },
+    "pointSaveResponse": {
+      "type": "object",
+      "title": "pointSaveResponse"
+    },
+    "protoConfigDropDownRequest": {
+      "type": "object",
+      "properties": {
+        "protocol": {
+          "type": "string",
+          "description": " 协议名称"
+        }
+      },
+      "title": "protoConfigDropDownRequest",
+      "required": [
+        "protocol"
+      ]
+    },
+    "protoConfigDropDownResponse": {
+      "type": "object",
+      "properties": {
+        "dropDown": {
+          "$ref": "#/definitions/mapstringinterface",
+          "description": " 对应的下拉框与保存接口的配置信息字段一致"
+        }
+      },
+      "title": "protoConfigDropDownResponse",
+      "required": [
+        "dropDown"
+      ]
+    },
+    "protoDropDownRequest": {
+      "type": "object",
+      "title": "protoDropDownRequest"
+    },
+    "protoDropDownResponse": {
+      "type": "object",
+      "properties": {
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Dropdown"
+          },
+          "description": " 数据"
+        }
+      },
+      "title": "protoDropDownResponse",
+      "required": [
+        "list"
+      ]
+    },
+    "protocolDelRequest": {
+      "type": "object",
+      "properties": {
+        "nids": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "description": " 协议id"
+        }
+      },
+      "title": "protocolDelRequest",
+      "required": [
+        "nids"
+      ]
+    },
+    "protocolDelResponse": {
+      "type": "object",
+      "properties": {
+        "deviceNid": {
+          "type": "integer",
+          "format": "int64",
+          "description": " 设备id"
+        }
+      },
+      "title": "protocolDelResponse",
+      "required": [
+        "deviceNid"
+      ]
+    },
+    "protocolListRequest": {
+      "type": "object",
+      "properties": {
+        "deviceNid": {
+          "type": "integer",
+          "format": "int64",
+          "description": " 设备id"
+        }
+      },
+      "title": "protocolListRequest",
+      "required": [
+        "deviceNid"
+      ]
+    },
+    "protocolListResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProtocolGain"
+          }
+        }
+      },
+      "title": "protocolListResponse",
+      "required": [
+        "data"
+      ]
+    },
+    "protocolSaveRequest": {
+      "type": "object",
+      "properties": {
+        "nid": {
+          "type": "integer",
+          "format": "int64",
+          "description": " 协议配置id 新增 0"
+        },
+        "protocol": {
+          "type": "string",
+          "description": " 协议名称"
+        },
+        "deviceNid": {
+          "type": "integer",
+          "format": "int64",
+          "description": " 设备ID"
+        },
+        "agwId": {
+          "type": "integer",
+          "format": "int64",
+          "description": " 所属网关ID"
+        },
+        "configType": {
+          "type": "integer",
+          "format": "int64",
+          "description": " 0-读/写,1-只读,2-只写"
+        },
+        "configName": {
+          "type": "string",
+          "description": " 配置名称"
+        },
+        "endpoint": {
+          "type": "string",
+          "description": " 连接URL"
+        },
+        "accessOptions": {
+          "$ref": "#/definitions/mapstringinterface",
+          "description": " 访问连接配置 显示为string 类型实际为json 类型 根据协议不同参数类型不固定详细字段查看Models（ModbusRtuJsonOptions、ModbusTcpJsonOptions、OpcUaJsonOptions）"
+        }
+      },
+      "title": "protocolSaveRequest",
+      "required": [
+        "nid",
+        "protocol",
+        "deviceNid",
+        "agwId",
+        "configType",
+        "configName",
+        "endpoint",
+        "accessOptions"
+      ]
+    },
+    "protocolSaveResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "string"
+        }
+      },
+      "title": "protocolSaveResponse",
+      "required": [
+        "data"
+      ]
+    }
+  },
+  "securityDefinitions": {
+    "apiKey": {
+      "type": "apiKey",
+      "description": "Enter JWT Bearer token **_only_**",
+      "name": "Authorization",
+      "in": "header"
+    }
+  }
+}

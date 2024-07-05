@@ -1,0 +1,20 @@
+CREATE TABLE `ne_device_data_access_config` (
+    `nid` bigint NOT NULL AUTO_INCREMENT COMMENT '主键ID',
+    `device_nid` bigint NOT NULL COMMENT '设备ID',
+    `config_type` int DEFAULT '0' COMMENT '0-读/写,1-只读,2-只写',
+    `config_id` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT '' COMMENT '配置ID)',
+    `config_name` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL COMMENT '配置名称',
+    `endpoint` varchar(3000) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL COMMENT '连接URL',
+    `protocol` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL COMMENT '访问协议：ModbusTcp, ModbusRtu, OpcUa, HTTP, MTCONNECT, MITSUBISH_MC, SIEMENS_S7, OMRON_SINS',
+    `json_access_options` text CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL COMMENT '访问连接基本配置(JSON格式)',
+    `timeout` int DEFAULT '1000' COMMENT '连接超时时间',
+    `agw_id` bigint NOT NULL COMMENT '所属网关ID',
+    `tenant_id` bigint DEFAULT '0' COMMENT '租户ID',
+    `profile_nid` bigint DEFAULT '0' COMMENT '设备配置文件ID',
+    `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `create_by` bigint NOT NULL COMMENT '创建者ID',
+    `issued` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否已下发：1-是,0-否',
+    `issue_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '下发时间',
+    PRIMARY KEY (`nid`) USING BTREE,
+    UNIQUE KEY `uk_device_data_access_config` (`device_nid`,`config_name`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=1816 DEFAULT CHARSET=utf8mb3 ROW_FORMAT=DYNAMIC COMMENT='设备数据访问配置'

@@ -1,0 +1,36 @@
+CREATE TABLE `ne_export_registration` (
+      `nid` bigint NOT NULL AUTO_INCREMENT COMMENT '主键ID',
+      `export_id` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL COMMENT '导出ID',
+      `export_name` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL COMMENT '导出配置名称',
+      `addr_id` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL COMMENT '导出地址',
+      `format` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT 'JSON' COMMENT '配置导出格式，默认JSON',
+      `filter` varchar(512) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL COMMENT '过滤条件',
+      `encryption_algorithm` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL COMMENT '加密类型',
+      `encryption_key` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL COMMENT '\r\n\r\n加密秘钥',
+      `initializing_vector` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL COMMENT '偏移量',
+      `compression` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL COMMENT '压缩配置，默认GZIP',
+      `enable` tinyint(1) NOT NULL DEFAULT '1' COMMENT '是否可用: 1-是，0-否',
+      `create_time` datetime NOT NULL COMMENT '创建时间',
+      `create_by` bigint NOT NULL COMMENT '创建人',
+      `agw_id` bigint NOT NULL COMMENT '网关ID',
+      `tenant_id` bigint NOT NULL COMMENT '租户ID',
+      `issued` tinyint(1) NOT NULL COMMENT '是否已下发：1-是,0-否',
+      `issue_time` datetime DEFAULT NULL COMMENT '下发时间',
+      `addr_name` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL COMMENT '地址名称(唯一)',
+      `protocol` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL COMMENT '协议,例如HTTP/TCP MQTT----TCP   REST------HTTP',
+      `address` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL COMMENT '协议地址(ip或者域名)',
+      `port` int NOT NULL COMMENT '端口号',
+      `publisher` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL COMMENT '发布者',
+      `username` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL COMMENT '导出目标所需用户名',
+      `password` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL COMMENT '导出目标所需密码',
+      `topic` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL COMMENT 'MQTT----Topic,REST-------path',
+      `export_target_type` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL COMMENT '导出目标类型：MQTT',
+      `method` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
+      `config_id` bigint DEFAULT NULL,
+      PRIMARY KEY (`nid`) USING BTREE,
+      UNIQUE KEY `uk_export_name` (`export_name`,`agw_id`) USING BTREE,
+      UNIQUE KEY `uk_export_addr_name` (`agw_id`,`addr_name`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=371 DEFAULT CHARSET=utf8mb3 ROW_FORMAT=DYNAMIC COMMENT='导出配置'
+
+
+

@@ -1,0 +1,113 @@
+syntax = "v1"
+
+info(
+    title: "网关协议"
+    desc: "网关协议配置及部署相关功能"
+    author: "sunguangyong"
+    email: "sungy@xunjikeji.com.cn"
+    version: "v1"
+)
+
+
+type(
+    pointSaveRequest {
+        Nid           int64                  `json:"nid"`           // 点表id 新增 0
+        AgwId         int64                  `json:"agwId"` // 网关id
+        DeviceNid     int64                   `json:"deviceNid"` // 设备id
+        ConfigType    int64                  `json:"configType"`    // 0-读/写,1-只读,2-只写
+        ConfigNid     int64                  `json:"configNid"`     // 协议配置id
+        AccessOptions map[string]interface{} `json:"accessOptions"` // 点表配置 显示为string 类型实际为json 类型 根据协议不同参数类型不固定详细字段查看 Models	ModbusRtuJsonItems、ModbusTcpJsonItems、ModbusTcpJsonItems
+    }
+
+    pointSaveResponse struct{}
+
+    pointDelRequest {
+        Nids []int64 `json:"nids"` // 点表id
+    }
+
+    pointDelResponse {
+    }
+
+    pointDelAllRequest {
+        ConfigNid int64 `json:"configNid"` // 协议id
+    }
+
+    pointDelAllResponse {
+    }
+
+    WritepointList {
+        Nid int64 `json:"nid"` // 点位 id
+        Address  uint16 `json:"address"`  // 地址位
+        ConfigNid  int64 `json:"configNid"`     // 协议配置id
+        DataName string `json:"dataName"` // 属性名
+        Method string `json:"method"` // 属性方法
+    }
+
+    pointListRequest {
+        ConfigNid int64 `json:"configNid"` // 协议配置id
+        PageIndex int64 `json:"pageIndex"` //页码索引
+        PageSize int64 `json:"pageSize"`   //页码大小
+    }
+
+    WritepointListResponse {
+        Data [] WritepointList `json:"data"`
+    }
+
+    PointData {
+        Nid           int64                  `json:"nid"`           // 点表id
+        ConfigType    int64                  `json:"configType"`    // 0-读/写,1-只读,2-只写
+        ConfigNid     int64                  `json:"configNid"`     // 协议配置id
+        AccessOptions map[string]interface{} `json:"accessOptions"` //类型实际为json 类型 根据协议不同参数类型不固定详细字段查看	ModbusRtuJsonItems、ModbusTcpJsonItems、OpcuaJsonItems
+    }
+
+    WritePointListRequest {
+        agwId int64 `json:"agwId"` // 网关id
+        ConfigType    int64                  `json:"configType"`    // 0-读/写,1-只读,2-只写
+        neDeviceId int64 `json:"neDeviceId"` // 设备id
+    }
+
+    pointListResponse {
+        DataList []PointData `json:"list"`  // 数据列表
+        Count int64 `json:"count"`          // 总数
+    }
+
+
+
+    WritePointResponse {
+        DataList []PointData `json:"list"`  // 数据列表
+    }
+)
+
+
+service apis {
+    @doc(
+        summary: "点表配置"
+    )
+    @handler pointSave
+    post /api/gateway/external/point/save (pointSaveRequest) returns (pointSaveResponse)
+
+    @doc(
+        summary: "删除单个点表配置"
+    )
+    @handler pointDelete
+    post /api/gateway/external/point/delete (pointDelRequest) returns (pointDelResponse)
+
+    @doc(
+        summary: "删除协议下的所有点表配置"
+    )
+    @handler pointDeleteAll
+    post /api/gateway/external/pointall/delete (pointDelAllRequest) returns (pointDelAllResponse)
+
+    @doc(
+        summary: "获取协议所有点表配置"
+    )
+    @handler pointList
+    post /api/gateway/external/point/list (pointListRequest) returns (pointListResponse)
+
+    @doc(
+        summary: "获取写协议所有点表配置"
+    )
+    @handler pointWriteList
+    post /api/gateway/external/writpoint/list (WritePointListRequest) returns (WritepointListResponse)
+}
+

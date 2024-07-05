@@ -1,0 +1,74 @@
+syntax = "v1"
+
+info(
+    title: "网关协议"
+    desc: "网关协议配置及部署相关功能"
+    author: "sunguangyong"
+    email: "sungy@xunjikeji.com.cn"
+    version: "v1"
+)
+
+
+type (
+
+    NeDeviceSaveRequest {
+        Nid               int64 `json:"nid"`    // 设备ID
+        DeviceName        string `json:"deviceName"` // 设备名称
+        DeviceDesc        string `json:"deviceDesc"` // 设备描述
+        ConnectProtocol   string `json:"connectProtocol"` // 连接协议
+        AgwId             int64 `json:"agwId"`     // 网关ID
+    }
+
+    NeDeviceSaveResponse{}
+
+    NeDeviceDeleteRequest {
+        AgwId           int64  `json:"agwId"`           // 网关ID
+        neDeviceIds []int64 `json:"neDeviceIds"` // 设备id
+    }
+
+    NeDeviceDeleteResponse{}
+
+    NeDeviceListRequest {
+        EdgeDeviceId      int64  `json:"edgeDeviceId"`   // 网关设备ID
+        PageIndex int64 `json:"pageIndex"` //页码索引
+        PageSize  int64 `json:"pageSize"`  //页码大小
+    }
+
+    NeDeviceListResponse  {
+        Data []NeDeviceList `json:"data"` // 数量
+        Count int64 `json:"count"` // 总数
+    }
+
+    NeDeviceList {
+        Nid               int64     `json:"nid"`                 // 设备ID
+        DeviceName        string    `json:"deviceName"`         // 设备名称
+        ConnectProtocol   string    `json:"connectProtocol"`    // 访问协议
+        DeviceLocations   string    `json:"deviceLocations"`    // 设备位置
+        AgwId             int64     `json:"agwId"`              // 网关ID
+        Issued            int64      `json:"issued"`            // 是否下发 1-是，0-否
+        CreateTime        string    `json:"createTime"`         // 设备创建时间
+        DeviceStatus      int64     `json:"deviceStatus"`       // 0---离线 1---- 在线
+    }
+
+)
+
+service apis {
+
+    @doc(
+        summary: "新增设备"
+    )
+    @handler neDeviceSave
+    post /api/nedevice/save (NeDeviceSaveRequest) returns (NeDeviceSaveResponse)
+
+    @doc(
+        summary: "删除设备"
+    )
+    @handler neDeviceDelete
+    post /api/nedevice/delete (NeDeviceDeleteRequest) returns (NeDeviceDeleteResponse)
+
+    @doc(
+        summary: "设备列表"
+    )
+    @handler neDeviceList
+    post /api/nedevice/list (NeDeviceListRequest) returns (NeDeviceListResponse)
+}

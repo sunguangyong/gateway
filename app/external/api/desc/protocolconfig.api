@@ -1,0 +1,167 @@
+syntax = "v1"
+
+info(
+    title: "网关协议"
+    desc: "网关协议配置及部署相关功能"
+    author: "sunguangyong"
+    email: "sungy@xunjikeji.com.cn"
+    version: "v1"
+)
+
+type(
+    protocolSaveRequest {
+        Nid           int64                  `json:"nid"`           // 协议配置id 新增 0
+        Protocol      string                 `json:"protocol"`      // 协议名称
+        DeviceNid     int64                  `json:"deviceNid"`     // 设备ID
+        AgwId         int64                  `json:"agwId"`         // 所属网关ID
+        ConfigType    int64                  `json:"configType"`    // 0-读/写,1-只读,2-只写
+        ConfigName    string                 `json:"configName"`    // 配置名称
+        Endpoint      string                 `json:"endpoint"`      // 连接URL
+        AccessOptions map[string]interface{} `json:"accessOptions"` // 访问连接配置 显示为string 类型实际为json 类型 根据协议不同参数类型不固定详细字段查看Models（ModbusRtuJsonOptions、ModbusTcpJsonOptions、OpcUaJsonOptions）
+    }
+
+    protocolSaveResponse {
+        Data string `json:"data"`
+    }
+
+    exportConfigRequest {
+        AgwId int64 `json:"agwId"` // 所属网关ID
+    }
+
+    exportConfigResponse {
+    }
+
+    protocolDelRequest {
+        Nids []int64 `json:"nids"` // 协议id
+    }
+
+    protocolDelResponse {
+        DeviceNid int64 `json:"deviceNid"` // 设备id
+    }
+
+    protocolListRequest {
+        DeviceNid int64 `json:"deviceNid"` // 设备id
+    }
+
+    protocolListResponse {
+        Data []ProtocolGain `json:"data"`
+    }
+
+    ProtocolGain {
+        Nid           int64                  `json:"nid"`           // 协议配置id
+        Protocol      string                 `json:"protocol"`      // 协议名称
+        DeviceNid     int64                  `json:"deviceNid"`     // 设备ID
+        AgwId         int64                  `json:"agwId"`         // 所属网关ID
+        ConfigType    int64                  `json:"configType"`    // 0-读/写,1-只读,2-只写
+        ConfigName    string                 `json:"configName"`    // 配置名称
+        Endpoint      string                 `json:"endpoint"`      // 连接信息
+        Issued        int64     `json:"issued"`              // 是否已经下发：1-是，0-否
+        IssueTime     string    `json:"issueTime"`          // 下发时间
+        AccessOptions map[string]interface{} `json:"accessOptions"` // 访问连接配置 显示为string 类型实际为json 类型 根据协议不同参数类型不固定详细字段查看 Models（ModbusRtuJsonOptions、ModbusTcpJsonOptions、OpcUaJsonOptions）
+    }
+
+    ProtocolDeployRequest {
+        AgwId int64 `json:"agwId"` // 网关id
+        neDeviceIds []int64 `json:"neDeviceIds"` // 设备id
+    }
+
+    ProtocolDeployResponse {
+        FailArray    []DeployArray `json:"failArray"`    // 失败列表
+        SuccessArray []DeployArray `json:"successArray"` // 成功列表
+    }
+
+    DeployArray {
+        Nid               int64  `json:"nid"`                 // 协议id
+        ConfigName        string  `json:"configName"`             // 协议名字
+        DeviceNid         int64  `json:"deviceNid"`          // 设备ID
+        DeviceName        string  `json:"deviceName"`          // 设备名字
+        Msg               string `json:"msg"`   // 错误描述信息
+    }
+
+    protoDropDownRequest struct{}
+
+    Dropdown {
+        Value interface{} `json:"value"`
+        Label interface{} `json:"label"`
+    }
+
+    protoDropDownResponse {
+        List []Dropdown `json:"list"` // 数据
+    }
+
+    protoConfigDropDownRequest {
+        Protocol string `json:"protocol"` // 协议名称
+    }
+
+    protoConfigDropDownResponse {
+        DropDown map[string]interface{} `json:"dropDown"` // 对应的下拉框与保存接口的配置信息字段一致
+    }
+
+    configSaveRequest {
+        Nid           string            `json:"nid"`       // id
+        Protocol      string            `json:"protocol"`  // 协议名称
+        DeviceNid     string            `json:"deviceNid"` // 设备id
+        AgwId         string            `json:"agwId"`     // 网关id
+        ConfigType    int               `json:"configType"`// 0-读/写,1-只读,2-只写
+        ConfigName    string            `json:"configName"`// 配置名称
+        Endpoint      string            `json:"endpoint"`  // 连接信息
+        AccessOptions AccessOptionsData `json:"accessOptions"`// 访问连接配置
+    }
+
+    AccessOptionsData {
+        Protocol     string `json:"protocol"` // 协议名称
+        AgwId        string `json:"agwId"`    // 网关id
+        SlaveId      string `json:"slaveId"`  // 从站地址
+        Offset       string `json:"offset"`   
+        FunctionCode string `json:"functionCode"`
+        Quantity     string `json:"quantity"`
+        AddParam     string `json:"addParam"`
+    }
+
+    configSaveResponse struct{}
+
+)
+
+service apis {
+    @doc(
+        summary: "保存协议配置"
+    )
+    @handler protoSave
+    post /api/gateway/external/protocol/save (protocolSaveRequest) returns (protocolSaveResponse)
+
+    @doc(
+        summary: "导出网关协议配置(暂不使用)"
+    )
+    @handler exportConfig
+    post /api/gateway/export/protocol/config (exportConfigRequest) returns (protocolSaveResponse)
+
+    @doc(
+        summary: "删除协议配置"
+    )
+    @handler protoDelete
+    post /api/gateway/external/protocol/delete (protocolDelRequest) returns (protocolDelResponse)
+
+    @doc(
+        summary: "获取协议配置"
+    )
+    @handler protoList
+    post /api/gateway/external/protocol/list (protocolListRequest) returns (protocolListResponse)
+
+    @doc(
+        summary: "协议名称下拉框"
+    )
+    @handler protoDropDown
+    post /api/gateway/external/protocol/dropdown (protoDropDownRequest) returns (protoDropDownResponse)
+
+    @doc(
+        summary: "协议配置信息下拉框"
+    )
+    @handler protoConfigDropDown
+    post /api/gateway/external/protoconfig/dropdown (protoConfigDropDownRequest) returns (protoConfigDropDownResponse)
+
+    @doc(
+        summary: "部署设备协议v2"
+    )
+    @handler protocolDeploy
+    post /api/gateway/external/protocol/deploy (ProtocolDeployRequest) returns (ProtocolDeployResponse)
+}
